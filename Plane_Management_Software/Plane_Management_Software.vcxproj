@@ -132,7 +132,6 @@
     <ClCompile Include="planeSeating.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h" />
     <ClInclude Include="planeInterface.h" />
     <ClInclude Include="planeSeating.h" />
   </ItemGroup>

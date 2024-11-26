@@ -1,11 +1,15 @@
 #pragma once
 
-#include "main.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
-// mattr - 71990f24 - assignment4
+// mattr - 71990f24 - assignment4 (refactor)
 
 // header file for plane seat setup
+
+#define PLANE_SIZE					12				// number of seats per plane
+#define STATUS_SIZE					5				// length of status thinghy
+#define NAME_LENGTH					25				// length of name
 
 typedef enum status { FREE, FULL } STATUS;																		// status to see if seat is full or not (thx steve)
 
@@ -28,7 +32,7 @@ void ReadPassengersFromFile(const char* oldFile);																// reads a pass
 
 void PrintPassengers();																							// prints all passengers
 
-int NumOfFREESeats();																							// returns #  of free seats
+int NumOfFREESeats();																							// returns # of free seats
 
 void PrintFreeSeats();																							// prints all the free seats
 

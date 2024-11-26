@@ -1,8 +1,7 @@
-#include "main.h"
 #include "planeSeating.h"
 #include <stdio.h>
 
-// mattr - 71990f24 - assignment4
+// mattr - 71990f24 - assignment4 (refactor)
 
 // class to setup the interface and create array of seats
 

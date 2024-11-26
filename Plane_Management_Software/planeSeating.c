@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "main.h"
 #include "planeSeating.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-// mattr - 71990f24 - assignment4
+// mattr - 71990f24 - assignment4 (refactor)
 
 // source file for plane seating struct
 
