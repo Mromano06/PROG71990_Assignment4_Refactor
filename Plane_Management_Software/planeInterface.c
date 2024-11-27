@@ -21,14 +21,14 @@ int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrack
 		printf("|Enter 3 for a list of all empty seats                 |\n");
 		printf("|Enter 4 to assign a new passenger to this assignment  |\n");
 		printf("|Enter 5 to delete passenger from this assignment      |\n");
-		printf("|Enter 6 for a list of all passengers (alphebetical    |\n");
+		printf("|Enter 6 for a list of all passengers (alphebetical)   |\n");
 		printf("|Enter 0 to quit                                       |\n");
 		printf("|======================================================|\n\n");
 		printf("Selection: ");
 		scanf_s("%d", &inputNum);
 		printf("\n");
 
-		if (inputNum < 0 || inputNum > 5) {													// checks if input number is less than 0 or greater than 5
+		if (inputNum < 0 || inputNum > 6) {													// checks if input number is less than 0 or greater than 5
 			printf("Invalid Input Value\n");
 		}
 
@@ -80,7 +80,7 @@ int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrack
 				if (inputNum != 1 && inputNum != 2)
 					printf("Invalid input.\n");
 				else {
-					SortNames(inputNum, seatTracker);
+					SortNames(&inputNum, seatTracker);
 					printf("\nPassengers sorted successfully\n");
 				}
 			}

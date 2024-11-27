@@ -9,7 +9,6 @@
 // source file for plane seating struct
 
 PLANESEAT createPassenger(char FirstName[], char LastName[], int SeatNumber) {
-
 	PLANESEAT newSeat;
 
 	newSeat.seatStatus = FREE;
@@ -18,6 +17,7 @@ PLANESEAT createPassenger(char FirstName[], char LastName[], int SeatNumber) {
 	strncpy(newSeat.lastName, LastName, NAME_LENGTH);
 
 	newSeat.seatNumber = SeatNumber;														// saves seat number
+
 
 	return newSeat;
 
@@ -33,7 +33,6 @@ void DefaultSeats(PLANESEAT seatTracker[]) {
 }
 
 void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
-
 	FILE* newFile = fopen(filename, "w");														// opens file to save data to
 
 	if (newFile == NULL) {
@@ -69,7 +68,6 @@ void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
 }
 
 void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
-
 	FILE* ogFile = fopen(filename, "r");														// opens file to read from
 		
 	if (ogFile) {
@@ -81,7 +79,6 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 		}
 
 		int currentSeat = 0;																	// renamed a lot of variables
-
 		char firstName[NAME_LENGTH] = { '\0' },
 			lastName[NAME_LENGTH] = { '\0' }, s[STATUS_SIZE] = { '\0' };						// temp variables for information
 		int seatNumber = 0;
@@ -123,7 +120,6 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 }
 
 void PrintPassengers(PLANESEAT seatTracker[]) {
-
 	int currentSeat = 0;
 
 	while (currentSeat < PLANE_SIZE) {															// checks if seat is full and if it is it prints it
@@ -136,9 +132,7 @@ void PrintPassengers(PLANESEAT seatTracker[]) {
 }
 
 int NumOfFREESeats(PLANESEAT seatTracker[]) {
-
 	int currentSeat = 0;
-
 	int freeSeats = 0;
 
 	while (currentSeat < PLANE_SIZE) {													
@@ -155,7 +149,6 @@ int NumOfFREESeats(PLANESEAT seatTracker[]) {
 }
 
 void PrintFreeSeats(PLANESEAT seatTracker[]) {
-
 	int currentSeat = 0;
 
 	while (currentSeat < PLANE_SIZE) {															// checks if seat is full and if it is NOT it prints it
@@ -168,7 +161,6 @@ void PrintFreeSeats(PLANESEAT seatTracker[]) {
 }
 
 void RemovePassenger(int inputNum, PLANESEAT seatTracker[]) {
-
 	int x = inputNum - 1;
 
 	if (seatTracker[x].seatStatus == FULL) {
@@ -181,7 +173,6 @@ void RemovePassenger(int inputNum, PLANESEAT seatTracker[]) {
 }
 
 void AddPassenger(int inputNum, PLANESEAT seatTracker[]) {
-
 	char* f = malloc(NAME_LENGTH * sizeof(char));												// allocate memory for first/last name
 	char* l = malloc(NAME_LENGTH * sizeof(char));
 
@@ -214,7 +205,23 @@ void AddPassenger(int inputNum, PLANESEAT seatTracker[]) {
 
 }
 
-void SortNames(int inputNum, PLANESEAT seatTracker[]) {
 
+//TODO figure out how to sort properly
+void SortNames(int* inputNum, PLANESEAT seatTracker[]) {
+	
+	/*
+	if (inputNum == 1) {
+		for (int i = 0; i < PLANE_SIZE; i++) {
+			if (strcmp(seatTracker[i].firstName, seatTracker[i+1].firstName) > 1)
+			printf("Passenger ID: Seat #%d, %s, %s\n", seatTracker[i].seatNumber,
+				seatTracker[i].lastName, seatTracker[i].firstName);
+		}
+	}
+	if (inputNum == 2) {
 
+	}
+	else {
+
+	}
+	*/
 }
