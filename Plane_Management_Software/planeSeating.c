@@ -214,4 +214,7 @@ void AddPassenger(int inputNum, PLANESEAT seatTracker[]) {
 
 }
 
+void SortNames(int inputNum, PLANESEAT seatTracker[]) {
 
+
+}
