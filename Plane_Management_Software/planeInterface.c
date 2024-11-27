@@ -5,7 +5,7 @@
 
 // class to setup the interface and create array of seats
 
-int PlaneInterface(const char* oldFile, const char* newFile) {
+int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]) {
 
 	int inputNum = -1;
 
@@ -38,16 +38,16 @@ int PlaneInterface(const char* oldFile, const char* newFile) {
 			}
 
 			else if (inputNum == 1) {														// Show alphabetical list of seats
-				PrintPassengers();
+				PrintPassengers(seatTracker);
 			}
 
 			else if (inputNum == 2) {														// Show number of empty seats
-				int printNum = NumOfFREESeats();
+				int printNum = NumOfFREESeats(seatTracker);
 				printf("Their are %d free seats.\n", printNum);
 			}
 
 			else if (inputNum == 3) {														// Show list of empty seats
-				PrintFreeSeats();
+				PrintFreeSeats(seatTracker);
 			}
 
 			else if (inputNum == 4) {														// Assign a customer to a seat assignment
@@ -56,7 +56,7 @@ int PlaneInterface(const char* oldFile, const char* newFile) {
 				if (inputNum > 12 || inputNum < 0 || seatTracker[inputNum - 1].seatStatus == FULL)
 					printf("Error this seat is already full or doesnt exist. \n");
 				else {
-					AddPassenger(inputNum);
+					AddPassenger(inputNum, seatTracker);
 					printf("\nPassenger added successfully\n");
 				}
 			}
@@ -67,7 +67,7 @@ int PlaneInterface(const char* oldFile, const char* newFile) {
 				if (inputNum > 12 || inputNum < 0 || seatTracker[inputNum - 1].seatStatus == FREE)
 					printf("Error this seat is already empty or doesnt exist. \n");
 				else {
-					RemovePassenger(inputNum);
+					RemovePassenger(inputNum, seatTracker);
 					printf("\nPassenger removed successfully\n");
 				}
 

@@ -20,22 +20,20 @@ typedef struct planeseat {
 	STATUS seatStatus;
 } PLANESEAT;
 
-PLANESEAT seatTracker[PLANE_SIZE];																				// creates an array for the seats
-
 PLANESEAT createPassenger(char FirstName[], char LastName[], int SeatNumber);									// creates new passenger in plane
 
-void DefaultSeats();																							// sets up all seats
+void DefaultSeats(PLANESEAT seatTracker[]);																		// sets up all seats
 
-void WritePassengersToFile(const char* filename);																// saves the passenger to file
+void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]);										// saves the passenger to file
 
-void ReadPassengersFromFile(const char* oldFile);																// reads a passenger from the file
+void ReadPassengersFromFile(const char* oldFile, PLANESEAT seatTracker[]);										// reads a passenger from the file
 
-void PrintPassengers();																							// prints all passengers
+void PrintPassengers(PLANESEAT seatTracker[]);																	// prints all passengers
 
-int NumOfFREESeats();																							// returns # of free seats
+int NumOfFREESeats(PLANESEAT seatTracker[]);																	// returns # of free seats
 
-void PrintFreeSeats();																							// prints all the free seats
+void PrintFreeSeats(PLANESEAT seatTracker[]);																	// prints all the free seats
 
-void RemovePassenger(int inputNum);																				// removes a passenger from array
+void RemovePassenger(int inputNum, PLANESEAT seatTracker[]);													// removes a passenger from array
 
-void AddPassenger(int inputNum);																				// adds passenger to array
+void AddPassenger(int inputNum, PLANESEAT seatTracker[]);														// adds passenger to array

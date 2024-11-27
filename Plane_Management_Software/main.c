@@ -34,20 +34,31 @@ o Documentation : 4.00 / 4.00 (The documentation is well written and clearly exp
 
 // param 1: "listOfPassengers.txt", param 2: "newList.txt"
 
-int main(int argc, char** argv) {
+void main() {
 
-	if (argc < 2) {															// checks if both files were sent
-		fprintf(stderr, "usage: missing command line paramater\n");
+	FILE* originalFile;
+	FILE* newFile;
+
+	originalFile = fopen("example.txt", "w");								// creates and adds new files
+	if (originalFile == NULL) {
+		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	DefaultSeats();
+	newFile = fopen("example.txt", "w");									// creates and adds new files
+	if (originalFile == NULL) {												// (also error checks)
+		fprintf(stderr, "system was unable to create file\n");
+		exit(EXIT_FAILURE);
+	}
 
-	ReadPassengersFromFile(argv[1]);
+	PLANESEAT seatTracker[PLANE_SIZE];										// no longer a global variable
+	DefaultSeats(seatTracker);
 
-	int returnValue = PlaneInterface(argv[1], argv[2]);
+	ReadPassengersFromFile(originalFile, seatTracker);
 
-	WritePassengersToFile(argv[2]);
+	int returnValue = PlaneInterface(originalFile, newFile, seatTracker);
+
+	WritePassengersToFile(newFile, seatTracker);
 
 	return returnValue;
 }
