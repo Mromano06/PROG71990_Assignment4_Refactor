@@ -77,7 +77,7 @@ int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrack
 			else if (inputNum == 6) {
 				printf("Do you want to sort by first or last name? (1 for first 2 for last): ");
 				scanf_s("%d", &inputNum);
-				if (inputNum != 1 || inputNum != 2)
+				if (inputNum != 1 && inputNum != 2)
 					printf("Invalid input.\n");
 				else {
 					SortNames(inputNum, seatTracker);
