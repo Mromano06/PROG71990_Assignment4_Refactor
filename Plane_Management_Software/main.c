@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "planeSeating.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,31 +36,36 @@ o Documentation : 4.00 / 4.00 (The documentation is well written and clearly exp
 
 // param 1: "listOfPassengers.txt", param 2: "newList.txt"
 
-void main() {
+int main(void) {
 
-	FILE* originalFile;
+	const char* originalFileName = "listOfPassengers.txt";					// saved the file names as const chars
+	const char* newFileName = "newList.txt";
+	FILE* originalFile;														// made temp files to create them
 	FILE* newFile;
 
-	originalFile = fopen("example.txt", "w");								// creates and adds new files
+	originalFile = fopen(originalFileName, "w");							// creates and adds new files
 	if (originalFile == NULL) {
 		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	newFile = fopen("example.txt", "w");									// creates and adds new files
+	newFile = fopen(newFileName, "w");										// creates and adds new files
 	if (originalFile == NULL) {												// (also error checks)
 		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
 
+	fclose(originalFile);
+	fclose(newFile);
+
 	PLANESEAT seatTracker[PLANE_SIZE];										// no longer a global variable
 	DefaultSeats(seatTracker);
 
-	ReadPassengersFromFile(originalFile, seatTracker);
+	ReadPassengersFromFile(originalFileName, seatTracker);
 
-	int returnValue = PlaneInterface(originalFile, newFile, seatTracker);
+	int returnValue = PlaneInterface(originalFileName, newFileName, seatTracker);
 
-	WritePassengersToFile(newFile, seatTracker);
+	WritePassengersToFile(newFileName, seatTracker);
 
-	return returnValue;
+	return 0;
 }

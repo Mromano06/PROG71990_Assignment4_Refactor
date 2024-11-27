@@ -21,6 +21,7 @@ int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrack
 		printf("|Enter 3 for a list of all empty seats                 |\n");
 		printf("|Enter 4 to assign a new passenger to this assignment  |\n");
 		printf("|Enter 5 to delete passenger from this assignment      |\n");
+		printf("|Enter 6 for a list of all passengers (alphebetical    |\n");
 		printf("|Enter 0 to quit                                       |\n");
 		printf("|======================================================|\n\n");
 		printf("Selection: ");
@@ -71,6 +72,17 @@ int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrack
 					printf("\nPassenger removed successfully\n");
 				}
 
+			}
+
+			else if (inputNum == 6) {
+				printf("Do you want to sort by first or last name? (1 for first 2 for last): ");
+				scanf_s("%d", &inputNum);
+				if (inputNum != 1 || inputNum != 2)
+					printf("Invalid input.\n");
+				else {
+					SortNames(inputNum, seatTracker);
+					printf("\nPassengers sorted successfully\n");
+				}
 			}
 
 		}
