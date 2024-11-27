@@ -43,14 +43,19 @@ int main(void) {
 	FILE* originalFile;														// made temp files to create them
 	FILE* newFile;
 
-	originalFile = fopen(originalFileName, "w");							// creates and adds new files
+	originalFile = fopen(originalFileName, "r");							// creates and adds new file
+	if (originalFile == NULL) {
+		originalFile = fopen(originalFileName, "w");
+	}
+	fclose(originalFile);
+
 	if (originalFile == NULL) {
 		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
 
 	newFile = fopen(newFileName, "w");										// creates and adds new files
-	if (originalFile == NULL) {												// (also error checks)
+	if (newFile == NULL) {													// (also error checks)
 		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
@@ -63,7 +68,8 @@ int main(void) {
 
 	ReadPassengersFromFile(originalFileName, seatTracker);
 
-	int returnValue = PlaneInterface(originalFileName, newFileName, seatTracker);
+	int returnValue = PlaneInterface(originalFileName,
+		newFileName, seatTracker);
 
 	WritePassengersToFile(newFileName, seatTracker);
 
