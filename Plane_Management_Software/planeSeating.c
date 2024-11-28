@@ -33,7 +33,48 @@ void DefaultSeats(PLANESEAT seatTracker[]) {
 }
 
 void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]) {
+	FILE* ogFile = fopen(oldFileName, "r");														// Open the file for reading
 
+	if (ogFile == NULL) {
+		perror("Error opening original file");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("File reading successful\n");
+	char line[200];  // Buffer to read each line
+	char section[100];
+	int temp = 0, seatNum = 0, currentSeat = 0;
+	char firstName[NAME_LENGTH] = { '\0' },
+		lastName[NAME_LENGTH] = { '\0' };
+	char* seat;
+
+	while (fgets(line, sizeof(line), ogFile) != NULL) {											// reads the line
+		if (sscanf(line, "[%99[^\n]]", section) == 1) {											// saves line as string
+			if (strcmp(section, "PASSENGERS") != 0) {											// checks to see if the flight is right
+				while (fgets(line, sizeof(line), ogFile) != NULL) {
+					if (line[0] == '[') {														// flight names formatted like [flight number]
+						break;
+					}
+				}
+			}
+			else {
+				while (fscanf(ogFile, "%d %s %s %s", &seatNum,									// if it find the right flight then it scans the structs
+					seat, lastName, firstName) == 4) {
+					strncpy(seatTracker[currentSeat].firstName, firstName, NAME_LENGTH);
+					strncpy(seatTracker[currentSeat].lastName, lastName, NAME_LENGTH);
+					seatTracker[currentSeat].seatNumber = seatNum;
+					if (strcmp(seat, "FULL") == 0)
+						seatTracker[currentSeat].seatStatus = FULL;
+					else
+						seatTracker[currentSeat].seatStatus = FREE;
+
+					currentSeat++;
+				}
+			}
+		}
+	}
+
+	fclose(ogFile);
 }
 
 
