@@ -6,15 +6,61 @@
 
 // class to setup the interface and create array of seats
 
-void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[], int planeNum, int flightNum) {
+void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]) {
 
-	int inputNum = -1, flight = flightNum, plane = planeNum;
+	int inputNum = -1, flight1 = 0, flight2 = 0, planeNum = 0, flightSelection = 0;
 
-	while (inputNum != 0) {
-		inputNum = -1;
-
+	do {
+		printf("\n|======================================================|\n");
+		printf("|This is the main menu for managing flight assignments |\n");
 		printf("|======================================================|\n");
-		printf("|This is the interface for managing flight: %d        |\n", flight);
+		printf("|Enter 1 for the first plane's assignments             |\n");
+		printf("|Enter 2 for the second plane's assignments            |\n");
+		printf("|Enter 0 to exit the program and save the assignments  |\n");
+		printf("|======================================================|\n");
+		printf("Selection: ");
+		scanf_s("%d", &inputNum);
+		printf("\n");
+
+		if (inputNum == 1) {
+			planeNum = 1;
+			flight1 = 102;
+			flight2 = 311;
+		}
+
+		else if (inputNum == 2) {
+			planeNum = 2;
+			flight1 = 444;
+			flight2 = 519;
+		}
+
+		else if (inputNum == 0)
+			break;
+
+		printf("\n|======================================================|\n");
+		printf("|Now managing plane %d                                |\n", planeNum);
+		printf("|======================================================|\n");
+		printf("|Enter 1 for flight %d                                |\n", flight1);
+		printf("|Enter 2 for flight %d				    			  |\n", flight2);
+		printf("|======================================================|\n");
+		printf("Selection: ");
+		scanf_s("%d", &inputNum);
+		printf("\n");
+		
+		if (inputNum == 1) {
+			flightSelection = flight1;
+		}
+
+		else if (inputNum == 2) {
+			flightSelection = flight2;
+		}
+
+		else
+			printf("Invalid input");
+		
+		if (inputNum == 1 || inputNum == 2) {
+		printf("|======================================================|\n");
+		printf("|This is the interface for managing flight: %d        |\n", flightSelection);
 		printf("|======================================================|\n");
 		printf("|Enter 1 for a list of all passengers                  |\n");
 		printf("|Enter 2 for the number of empty seats                 |\n");
@@ -95,8 +141,10 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 			}
 
 		}
+		
+		}
 
-	}
+	} while (inputNum != 0);
 
 
 	return 0;
