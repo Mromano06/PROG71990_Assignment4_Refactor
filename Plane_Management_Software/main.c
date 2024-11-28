@@ -68,73 +68,7 @@ int main(void) {
 
 	ReadPassengersFromFile(originalFileName, seatTracker);
 
-	do {
-		printf("\n|======================================================|\n");
-		printf("|This is the main menu for managing flight assignments |\n");
-		printf("|======================================================|\n");
-		printf("|Enter 1 for the first plane's assignments             |\n");
-		printf("|Enter 2 for the second plane's assignments            |\n");
-		printf("|Enter 0 to exit the program and save the assignments  |\n");
-		printf("|======================================================|\n");
-		printf("Selection: ");
-		scanf_s("%d", &exitNum);
-		printf("\n");
-
-		if (exitNum > 2 || exitNum < 0) {
-			printf("Invalid input\n");
-		}
-
-		else if (exitNum == 1) {
-			planeNum = 1;
-			printf("\n|======================================================|\n");
-			printf("|Now managing flight 1                                 |\n");
-			printf("|======================================================|\n");
-			printf("|Enter 1 for flight 102                                |\n");
-			printf("|Enter 2 for flight 311                                |\n");
-			printf("|Enter 0 to cancel                                     |\n");
-			printf("|======================================================|\n");
-			printf("Selection: ");
-			scanf_s("%d", &exitNum);
-			printf("\n");
-
-			if (exitNum == 1) {
-				flightNum = 102;
-				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
-			}
-			else if (exitNum == 2) {
-				flightNum = 311;
-				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
-			}
-			else
-				printf("Invalid input\n");
-		}
-
-		else if (exitNum == 2) {
-			planeNum = 2;
-			printf("\n|======================================================|\n");
-			printf("|Now managing flight 2                                 |\n");
-			printf("|======================================================|\n");
-			printf("|Enter 1 for flight 444                                |\n");
-			printf("|Enter 2 for flight 519                                |\n");
-			printf("|Enter 0 to cancel                                     |\n");
-			printf("|======================================================|\n");
-			printf("Selection: ");
-			scanf_s("%d", &exitNum);
-			printf("\n");
-
-			if (exitNum == 1) {
-				flightNum = 444;
-				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
-			}
-			else if (exitNum == 2) {
-				flightNum = 519;
-				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
-			}
-			else
-				printf("Invalid input\n");
-		}
-
-	} while (exitNum != 0);
+	PlaneInterface(originalFileName, newFileName, seatTracker);
 
 	WritePassengersToFile(newFileName, seatTracker);
 

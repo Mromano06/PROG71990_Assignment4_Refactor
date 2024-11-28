@@ -11,6 +11,7 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 	int inputNum = -1, flight1 = 0, flight2 = 0, planeNum = 0, flightSelection = 0;
 
 	do {
+		flightSelection = 0, flightSelection = 0;
 		printf("\n|======================================================|\n");
 		printf("|This is the main menu for managing flight assignments |\n");
 		printf("|======================================================|\n");
@@ -22,26 +23,29 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 		scanf_s("%d", &inputNum);
 		printf("\n");
 
+		if (inputNum < 0 || inputNum > 2) {													// checks if input number is less than 0 or greater than 2
+			printf("Invalid Input Value\n");
+		}
+		else {
+
 		if (inputNum == 1) {
 			planeNum = 1;
 			flight1 = 102;
 			flight2 = 311;
 		}
-
 		else if (inputNum == 2) {
 			planeNum = 2;
 			flight1 = 444;
 			flight2 = 519;
 		}
-
 		else if (inputNum == 0)
 			break;
 
 		printf("\n|======================================================|\n");
-		printf("|Now managing plane %d                                |\n", planeNum);
+		printf("|Now managing plane %d                                  |\n", planeNum);
 		printf("|======================================================|\n");
 		printf("|Enter 1 for flight %d                                |\n", flight1);
-		printf("|Enter 2 for flight %d				    			  |\n", flight2);
+		printf("|Enter 2 for flight %d                                |\n", flight2);
 		printf("|======================================================|\n");
 		printf("Selection: ");
 		scanf_s("%d", &inputNum);
@@ -50,15 +54,14 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 		if (inputNum == 1) {
 			flightSelection = flight1;
 		}
-
 		else if (inputNum == 2) {
 			flightSelection = flight2;
 		}
+		if (inputNum < 1 || inputNum > 2) {													
+			printf("Invalid Input Value\n");
+		}
+		else {
 
-		else
-			printf("Invalid input");
-		
-		if (inputNum == 1 || inputNum == 2) {
 		printf("|======================================================|\n");
 		printf("|This is the interface for managing flight: %d        |\n", flightSelection);
 		printf("|======================================================|\n");
@@ -75,14 +78,14 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 		scanf_s("%d", &inputNum);
 		printf("\n");
 
-		if (inputNum < 0 || inputNum > 7) {													// checks if input number is less than 0 or greater than 5
+		if (inputNum < 0 || inputNum > 7) {													// checks if input number is less than 0 or greater than 2
 			printf("Invalid Input Value\n");
 		}
 
 		else {
 
 			if (inputNum == 0) {															// Quit
-				return 0;
+				inputNum = -1;
 			}
 
 			else if (inputNum == 1) {														// Show alphabetical list of seats
@@ -141,7 +144,9 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 			}
 
 		}
-		
+
+		}
+
 		}
 
 	} while (inputNum != 0);
