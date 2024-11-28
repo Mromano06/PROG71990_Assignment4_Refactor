@@ -50,8 +50,8 @@ void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatT
 		lastName[NAME_LENGTH] = { '\0' };
 	char seat[STATUS_SIZE] = { '\0' };
 
-	while (fgets(line, sizeof(line), ogFile) != NULL && currentSeat <= PLANE_SIZE) {				// reads the line
-		line
+	while (fgets(line, sizeof(line), ogFile) != NULL && currentSeat < PLANE_SIZE) {					// reads the line
+		line[strlen(line) - 1] = 0;																	// deletes last two characters of string "\n"
 		if (strcmp(line, flightName) == 0) {														// giving me issues with saving line as num\n instead of num
 			correctFlight = 1;
 			continue;
@@ -70,7 +70,7 @@ void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatT
 
 					currentSeat++;
 
-					if (currentSeat >= PLANE_SIZE)
+					if (currentSeat == PLANE_SIZE)
 						break;
 				}
 			}
