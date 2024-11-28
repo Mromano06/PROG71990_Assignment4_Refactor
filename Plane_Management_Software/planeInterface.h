@@ -6,4 +6,4 @@
 
 // header file for interface (pretty empty)
 
-int PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]);
+void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]);

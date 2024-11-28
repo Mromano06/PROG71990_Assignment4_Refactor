@@ -202,13 +202,11 @@ void AddPassenger(int inputNum, PLANESEAT seatTracker[]) {
 
 	free(l);
 	free(f);
-
 }
 
 
 //TODO figure out how to sort properly
 void SortNames(int* inputNum, PLANESEAT seatTracker[]) {
-	
 	/*
 	if (inputNum == 1) {
 		for (int i = 0; i < PLANE_SIZE; i++) {
@@ -224,4 +222,18 @@ void SortNames(int* inputNum, PLANESEAT seatTracker[]) {
 
 	}
 	*/
+}
+
+bool FindPassenger(char inputName[], PLANESEAT seatTracker[]) {	
+	for (int i = 0; i < PLANE_SIZE; i++) {														// checks every name to see
+		if (strcmp(inputName, seatTracker[i].firstName) == 0) {
+			printf("\nPassenger ID: Seat #%d, %s, %s\n", seatTracker[i].seatNumber,				// prints the passenger with that name and returns true
+				seatTracker[i].lastName, seatTracker[i].firstName);
+			return true;
+		}
+	}
+	printf("\nUnable to find passenger\n");
+
+
+	return false;
 }

@@ -37,9 +37,9 @@ o Documentation : 4.00 / 4.00 (The documentation is well written and clearly exp
 // param 1: "listOfPassengers.txt", param 2: "newList.txt"
 
 int main(void) {
-
-	const char* originalFileName = "listOfPassengers.txt";					// saved the file names as const chars
-	const char* newFileName = "newList.txt";
+	int exitNum = -1;
+	const char* originalFileName = "flightData.txt";					// saved the file names as const chars
+	const char* newFileName = "flightDataUpdated.txt";
 	FILE* originalFile;														// made temp files to create them
 	FILE* newFile;
 
@@ -68,8 +68,21 @@ int main(void) {
 
 	ReadPassengersFromFile(originalFileName, seatTracker);
 
-	int returnValue = PlaneInterface(originalFileName,
-		newFileName, seatTracker);
+	do {
+		printf("\n|======================================================|\n");
+		printf("|This is the main menu for managing flight assignments |\n");
+		printf("|======================================================|\n");
+		printf("|Enter 1 for the first plane's assignments             |\n");
+		printf("|Enter 2 for the second plane's assignments            |\n");
+		printf("|Enter 0 to exit the program and save the assignments  |\n");
+		printf("|======================================================|\n");
+		printf("Selection: ");
+		scanf_s("%d", &exitNum);
+		printf("\n");
+
+		PlaneInterface(originalFileName, newFileName, seatTracker);
+
+	} while (exitNum != 0);
 
 	WritePassengersToFile(newFileName, seatTracker);
 

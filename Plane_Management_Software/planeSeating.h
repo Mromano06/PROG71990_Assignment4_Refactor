@@ -38,4 +38,6 @@ void RemovePassenger(int inputNum, PLANESEAT seatTracker[]);													// remo
 
 void AddPassenger(int inputNum, PLANESEAT seatTracker[]);														// adds passenger to array
 
-void SortNames(int* inputNum, PLANESEAT seatTracker[]);															// prints all seats alphabetically
+void SortNames(int* inputNum, PLANESEAT seatTracker[]);															// prints all seats alphabetically (not functional)
+
+bool FindPassenger(char inputName[], PLANESEAT seatTracker[]);
