@@ -24,6 +24,8 @@ PLANESEAT createPassenger(char FirstName[], char LastName[], int SeatNumber);			
 
 void DefaultSeats(PLANESEAT seatTracker[]);																		// sets up all seats
 
+void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]);
+
 void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]);										// saves the passenger to file
 
 void ReadPassengersFromFile(const char* oldFile, PLANESEAT seatTracker[]);										// reads a passenger from the file

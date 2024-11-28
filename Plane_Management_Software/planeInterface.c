@@ -1,4 +1,6 @@
 #include "planeSeating.h"
+#include "planeInterface.h"
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -61,22 +63,22 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 			printf("Invalid Input Value\n");
 		}
 		else {
-
-		printf("|======================================================|\n");
-		printf("|This is the interface for managing flight: %d        |\n", flightSelection);
-		printf("|======================================================|\n");
-		printf("|Enter 1 for a list of all passengers                  |\n");
-		printf("|Enter 2 for the number of empty seats                 |\n");
-		printf("|Enter 3 for a list of all empty seats                 |\n");
-		printf("|Enter 4 to assign a new passenger to this assignment  |\n");
-		printf("|Enter 5 to delete passenger from this assignment      |\n");
-		printf("|Enter 6 for a list of all passengers (alphebetical)   |\n");				// still havent figured this out
-		printf("|Enter 7 to confirm seating assignment                 |\n");
-		printf("|Enter 0 to quit to main menu                          |\n");
-		printf("|======================================================|\n\n");
-		printf("Selection: ");
-		scanf_s("%d", &inputNum);
-		printf("\n");
+			GetFlightData(oldFile, flightSelection, seatTracker);
+			printf("|======================================================|\n");
+			printf("|This is the interface for managing flight: %d        |\n", flightSelection);
+			printf("|======================================================|\n");
+			printf("|Enter 1 for a list of all passengers                  |\n");
+			printf("|Enter 2 for the number of empty seats                 |\n");
+			printf("|Enter 3 for a list of all empty seats                 |\n");
+			printf("|Enter 4 to assign a new passenger to this assignment  |\n");
+			printf("|Enter 5 to delete passenger from this assignment      |\n");
+			printf("|Enter 6 for a list of all passengers (alphebetical)   |\n");				// still havent figured this out
+			printf("|Enter 7 to confirm seating assignment                 |\n");
+			printf("|Enter 0 to quit to main menu                          |\n");
+			printf("|======================================================|\n\n");
+			printf("Selection: ");
+			scanf_s("%d", &inputNum);
+			printf("\n");
 
 		if (inputNum < 0 || inputNum > 7) {													// checks if input number is less than 0 or greater than 2
 			printf("Invalid Input Value\n");
@@ -150,8 +152,4 @@ void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTrac
 		}
 
 	} while (inputNum != 0);
-
-
-	return 0;
-
 }

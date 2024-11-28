@@ -32,6 +32,11 @@ void DefaultSeats(PLANESEAT seatTracker[]) {
 	}
 }
 
+void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]) {
+
+}
+
+
 void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
 	FILE* newFile = fopen(filename, "w");														// opens file to save data to
 
@@ -83,7 +88,7 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 			lastName[NAME_LENGTH] = { '\0' }, s[STATUS_SIZE] = { '\0' };						// temp variables for information
 		int seatNumber = 0;
 
-		while (fscanf(ogFile, "%d %s %s %s",													// saves valuse to temp variables before sending them to array
+		while (fscanf(ogFile, "%d %s %s %s",													// saves values to temp variables before sending them to array
 			&seatNumber, &s, &lastName, &firstName) == 4) {
 
 			strncpy(seatTracker[currentSeat].firstName, firstName, NAME_LENGTH);				// saves first and last name
