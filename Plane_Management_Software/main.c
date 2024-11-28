@@ -86,6 +86,8 @@ int main(void) {
 
 		else if (exitNum == 1) {
 			planeNum = 1;
+			printf("\n|======================================================|\n");
+			printf("|Now managing flight 1                                 |\n");
 			printf("|======================================================|\n");
 			printf("|Enter 1 for flight 102                                |\n");
 			printf("|Enter 2 for flight 311                                |\n");
@@ -109,6 +111,8 @@ int main(void) {
 
 		else if (exitNum == 2) {
 			planeNum = 2;
+			printf("\n|======================================================|\n");
+			printf("|Now managing flight 2                                 |\n");
 			printf("|======================================================|\n");
 			printf("|Enter 1 for flight 444                                |\n");
 			printf("|Enter 2 for flight 519                                |\n");

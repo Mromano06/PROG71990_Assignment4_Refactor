@@ -8,13 +8,13 @@
 
 void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[], int planeNum, int flightNum) {
 
-	int inputNum = -1;
+	int inputNum = -1, flight = flightNum, plane = planeNum;
 
 	while (inputNum != 0) {
 		inputNum = -1;
 
-		printf("\n|======================================================|\n");
-		printf("|This is the interface for managing seating assignments|\n");
+		printf("|======================================================|\n");
+		printf("|This is the interface for managing flight: %d        |\n", flight);
 		printf("|======================================================|\n");
 		printf("|Enter 1 for a list of all passengers                  |\n");
 		printf("|Enter 2 for the number of empty seats                 |\n");
