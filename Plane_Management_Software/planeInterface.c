@@ -6,7 +6,7 @@
 
 // class to setup the interface and create array of seats
 
-void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]) {
+void PlaneInterface(const char* oldFile, const char* newFile, PLANESEAT seatTracker[], int planeNum, int flightNum) {
 
 	int inputNum = -1;
 

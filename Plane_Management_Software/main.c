@@ -37,8 +37,8 @@ o Documentation : 4.00 / 4.00 (The documentation is well written and clearly exp
 // param 1: "listOfPassengers.txt", param 2: "newList.txt"
 
 int main(void) {
-	int exitNum = -1;
-	const char* originalFileName = "flightData.txt";					// saved the file names as const chars
+	int planeNum = 0, flightNum = 0, exitNum = -1;
+	const char* originalFileName = "flightData.txt";						// saved the file names as const chars
 	const char* newFileName = "flightDataUpdated.txt";
 	FILE* originalFile;														// made temp files to create them
 	FILE* newFile;
@@ -80,7 +80,55 @@ int main(void) {
 		scanf_s("%d", &exitNum);
 		printf("\n");
 
-		PlaneInterface(originalFileName, newFileName, seatTracker);
+		if (exitNum > 2 || exitNum < 0) {
+			printf("Invalid input\n");
+		}
+
+		else if (exitNum == 1) {
+			planeNum = 1;
+			printf("|======================================================|\n");
+			printf("|Enter 1 for flight 102                                |\n");
+			printf("|Enter 2 for flight 311                                |\n");
+			printf("|Enter 0 to cancel                                     |\n");
+			printf("|======================================================|\n");
+			printf("Selection: ");
+			scanf_s("%d", &exitNum);
+			printf("\n");
+
+			if (exitNum == 1) {
+				flightNum = 102;
+				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
+			}
+			else if (exitNum == 2) {
+				flightNum = 311;
+				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
+			}
+			else
+				printf("Invalid input\n");
+		}
+
+		else if (exitNum == 2) {
+			planeNum = 2;
+			printf("|======================================================|\n");
+			printf("|Enter 1 for flight 444                                |\n");
+			printf("|Enter 2 for flight 519                                |\n");
+			printf("|Enter 0 to cancel                                     |\n");
+			printf("|======================================================|\n");
+			printf("Selection: ");
+			scanf_s("%d", &exitNum);
+			printf("\n");
+
+			if (exitNum == 1) {
+				flightNum = 444;
+				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
+			}
+			else if (exitNum == 2) {
+				flightNum = 519;
+				PlaneInterface(originalFileName, newFileName, seatTracker, planeNum, flightNum);
+			}
+			else
+				printf("Invalid input\n");
+		}
 
 	} while (exitNum != 0);
 
