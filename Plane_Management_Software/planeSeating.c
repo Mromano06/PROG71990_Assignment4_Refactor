@@ -33,24 +33,27 @@ void DefaultSeats(PLANESEAT seatTracker[]) {
 }
 
 void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]) {
-	FILE* ogFile = fopen(oldFileName, "r");														// Open the file for reading
+	int flight = flightSelection;
+	char flightName[NAME_LENGTH] = { '\0' };
+	sprintf(flightName, "%d", flight);
 
+	FILE* ogFile = fopen(oldFileName, "r");														// Open the file for reading
 	if (ogFile == NULL) {
 		perror("Error opening original file");
 		exit(EXIT_FAILURE);
 	}
 
 	printf("File reading successful\n");
-	char line[200];  // Buffer to read each line
+	char line[200];
 	char section[100];
 	int temp = 0, seatNum = 0, currentSeat = 0;
 	char firstName[NAME_LENGTH] = { '\0' },
 		lastName[NAME_LENGTH] = { '\0' };
-	char* seat;
+	char* seat = " ";
 
 	while (fgets(line, sizeof(line), ogFile) != NULL) {											// reads the line
 		if (sscanf(line, "[%99[^\n]]", section) == 1) {											// saves line as string
-			if (strcmp(section, "PASSENGERS") != 0) {											// checks to see if the flight is right
+			if (strcmp(section, flightName) != 0) {												// checks to see if the flight is right
 				while (fgets(line, sizeof(line), ogFile) != NULL) {
 					if (line[0] == '[') {														// flight names formatted like [flight number]
 						break;
