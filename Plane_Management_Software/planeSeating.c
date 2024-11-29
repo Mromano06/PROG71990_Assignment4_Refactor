@@ -48,7 +48,7 @@ void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatT
 	int temp = 0, seatNum = 0, currentSeat = 0;
 	char firstName[NAME_LENGTH] = { '\0' },
 		lastName[NAME_LENGTH] = { '\0' };
-	char seat[STATUS_SIZE] = { '\0' };
+	char seat[NAME_LENGTH] = { '\0' };
 
 	while (fgets(line, sizeof(line), ogFile) != NULL && currentSeat < PLANE_SIZE) {					// reads the line
 		line[strlen(line) - 1] = 0;																	// deletes last two characters of string "\n"
@@ -94,29 +94,37 @@ void WritePassengersToFile(const char* oldFileName, const char* filename,							
 		int temp = 0, seatNum = 0;
 		char firstName[NAME_LENGTH] = { '\0' },
 			lastName[NAME_LENGTH] = { '\0' };
-		char* seat;
+		char seat[STATUS_SIZE] = { '\0' };
 
-		for (int i = 0; i <= NUM_OF_FLIGHTS; i++) {
-			if (i == 1)
-			GetFlightData(oldFileName, 102, seatTracker);											// this makes me feel uncomfy but it works
-			else if (i == 2)
+		for (int i = 1; i <= NUM_OF_FLIGHTS; i++) {
+			fprintf(newFile, "\n");
+			if (i == 1) {
+			GetFlightData(oldFileName, 102, seatTracker);											// this makes me feel bad but it works
+			fprintf(newFile, "102\n");
+			}
+			else if (i == 2) {
 				GetFlightData(oldFileName, 311, seatTracker);
-			else if (i == 3)
+			fprintf(newFile, "311\n");
+			}
+			else if (i == 3) {
 				GetFlightData(oldFileName, 444, seatTracker);
-			else if (i == 4)
+			fprintf(newFile, "444\n");
+			}
+			else if (i == 4) {
 				GetFlightData(oldFileName, 519, seatTracker);
+			fprintf(newFile, "519\n");
+			}
 
 			for (int x = 0; x < PLANE_SIZE; x++) {
-				fprintf(newFile, "\n");
 
 				strncpy(firstName, seatTracker[x].firstName, NAME_LENGTH);							 // save first name in f an dlast name in l
 				strncpy(lastName, seatTracker[x].lastName, NAME_LENGTH);
 				seatNum = seatTracker[x].seatNumber;												 // save seat number as n
 
-				if (seatTracker[x].seatStatus == FULL)												 // checks if seat is full or not
-					seat = "FULL";
+				if (strcmp(seat, "FULL") == 0)																// checks if value is FREE or FULL
+					seatTracker[x].seatStatus = FULL;
 				else
-					seat = "FREE";
+					seatTracker[x].seatStatus = FREE;
 
 				fprintf(newFile, "%d %s %s %s", seatNum, seat, lastName, firstName);				 // print all values to the file
 				fprintf(newFile, "\n");
@@ -141,16 +149,16 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 
 		int currentSeat = 0;																		// renamed a lot of variables
 		char firstName[NAME_LENGTH] = { '\0' },
-			lastName[NAME_LENGTH] = { '\0' }, s[STATUS_SIZE] = { '\0' };							// temp variables for information
+			lastName[NAME_LENGTH] = { '\0' }, seat[STATUS_SIZE] = { '\0' };							// temp variables for information
 		int seatNumber = 0;
 				
 		while (fscanf(ogFile, "%d %s %s %s",														// saves values to temp variables before sending them to array
-			&seatNumber, &s, &lastName, &firstName) == 4) {
+			&seatNumber, &seat, &lastName, &firstName) == 4) {
 
 			strncpy(seatTracker[currentSeat].firstName, firstName, NAME_LENGTH);					// saves first and last name
 			strncpy(seatTracker[currentSeat].lastName, lastName, NAME_LENGTH);
 			seatTracker[currentSeat].seatNumber = seatNumber;
-			if (strcmp(s, "FULL") == 0)																// checks if value is FREE or FULL
+			if (strcmp(seat, "FULL") == 0)																// checks if value is FREE or FULL
 				seatTracker[currentSeat].seatStatus = FULL;
 			else
 				seatTracker[currentSeat].seatStatus = FREE;
