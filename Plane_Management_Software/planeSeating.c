@@ -54,7 +54,6 @@ void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatT
 		line[strlen(line) - 1] = 0;																	// deletes last two characters of string "\n"
 		if (strcmp(line, flightName) == 0) {														// giving me issues with saving line as num\n instead of num
 			correctFlight = 1;
-			continue;
 		}
 			if (correctFlight) {
 				while (fscanf(ogFile, "%d %s %s %s", &seatNum,										// if it find the right flight then it scans the structs
