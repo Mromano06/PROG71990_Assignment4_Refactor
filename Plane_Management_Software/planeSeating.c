@@ -79,11 +79,13 @@ void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatT
 }
 
 
-void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
-	FILE* newFile = fopen(filename, "w");														// opens file to save data to
+void WritePassengersToFile(const char* oldFileName, const char* filename,							// had to include old file
+	PLANESEAT seatTracker[]) {
+	FILE* newFile = fopen(filename, "w");															// opens file to save data to
+	int flightNum = 0;
 
 	if (newFile == NULL) {
-		perror("Error opening original file");												    // error check
+		perror("Error opening original file");													    // error check
 		exit(EXIT_FAILURE);
 	}
 
@@ -94,19 +96,31 @@ void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
 			lastName[NAME_LENGTH] = { '\0' };
 		char* seat;
 
-		for (int x = 0; x < PLANE_SIZE; x++) {
+		for (int i = 0; i <= NUM_OF_FLIGHTS; i++) {
+			if (i == 1)
+			GetFlightData(oldFileName, 102, seatTracker);											// this makes me feel uncomfy but it works
+			else if (i == 2)
+				GetFlightData(oldFileName, 311, seatTracker);
+			else if (i == 3)
+				GetFlightData(oldFileName, 444, seatTracker);
+			else if (i == 4)
+				GetFlightData(oldFileName, 519, seatTracker);
 
-			strncpy(firstName, seatTracker[x].firstName, NAME_LENGTH);							 // save first name in f an dlast name in l
-			strncpy(lastName, seatTracker[x].lastName, NAME_LENGTH);
-			seatNum = seatTracker[x].seatNumber;												 // save seat number as n
+			for (int x = 0; x < PLANE_SIZE; x++) {
+				fprintf(newFile, "\n");
 
-			if (seatTracker[x].seatStatus == FULL)												 // checks if seat is full or not
-				seat = "FULL";
-			else
-				seat = "FREE";
+				strncpy(firstName, seatTracker[x].firstName, NAME_LENGTH);							 // save first name in f an dlast name in l
+				strncpy(lastName, seatTracker[x].lastName, NAME_LENGTH);
+				seatNum = seatTracker[x].seatNumber;												 // save seat number as n
 
-			fprintf(newFile, "%d %s %s %s", seatNum, seat, lastName, firstName);				 // print all values to the file
-			fprintf(newFile, "\n");
+				if (seatTracker[x].seatStatus == FULL)												 // checks if seat is full or not
+					seat = "FULL";
+				else
+					seat = "FREE";
+
+				fprintf(newFile, "%d %s %s %s", seatNum, seat, lastName, firstName);				 // print all values to the file
+				fprintf(newFile, "\n");
+			}
 		}
 
 		fclose(newFile);
@@ -115,33 +129,33 @@ void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]) {
 }
 
 void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
-	FILE* ogFile = fopen(filename, "r");														// opens file to read from
+	FILE* ogFile = fopen(filename, "r");															// opens file to read from
 		
 	if (ogFile) {
 		printf("File reading successful\n");
 
 		if (ogFile == NULL) {
-			perror("Error opening original file");											    // error check
+			perror("Error opening original file");												    // error check
 			exit(EXIT_FAILURE);
 		}
 
-		int currentSeat = 0;																	// renamed a lot of variables
+		int currentSeat = 0;																		// renamed a lot of variables
 		char firstName[NAME_LENGTH] = { '\0' },
-			lastName[NAME_LENGTH] = { '\0' }, s[STATUS_SIZE] = { '\0' };						// temp variables for information
+			lastName[NAME_LENGTH] = { '\0' }, s[STATUS_SIZE] = { '\0' };							// temp variables for information
 		int seatNumber = 0;
-
-		while (fscanf(ogFile, "%d %s %s %s",													// saves values to temp variables before sending them to array
+				
+		while (fscanf(ogFile, "%d %s %s %s",														// saves values to temp variables before sending them to array
 			&seatNumber, &s, &lastName, &firstName) == 4) {
 
-			strncpy(seatTracker[currentSeat].firstName, firstName, NAME_LENGTH);				// saves first and last name
+			strncpy(seatTracker[currentSeat].firstName, firstName, NAME_LENGTH);					// saves first and last name
 			strncpy(seatTracker[currentSeat].lastName, lastName, NAME_LENGTH);
 			seatTracker[currentSeat].seatNumber = seatNumber;
-			if (strcmp(s, "FULL") == 0)															// checks if value is FREE or FULL
+			if (strcmp(s, "FULL") == 0)																// checks if value is FREE or FULL
 				seatTracker[currentSeat].seatStatus = FULL;
 			else
 				seatTracker[currentSeat].seatStatus = FREE;
 
-			currentSeat++;																		// this will read from old file
+			currentSeat++;																			// this will read from old file
 
 		}
 
@@ -156,7 +170,7 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 		FILE* ogFile = fopen(filename, "w");
 
 		if (ogFile == NULL) {
-			perror("Error opening original file");											    // error check
+			perror("Error opening original file");												   // error check
 			exit(EXIT_FAILURE);
 		}
 
@@ -169,7 +183,7 @@ void ReadPassengersFromFile(const char* filename, PLANESEAT seatTracker[]) {
 void PrintPassengers(PLANESEAT seatTracker[]) {
 	int currentSeat = 0;
 
-	while (currentSeat < PLANE_SIZE) {															// checks if seat is full and if it is it prints it
+	while (currentSeat < PLANE_SIZE) {																// checks if seat is full and if it is it prints it
 		if (seatTracker[currentSeat].seatStatus == FULL)
 			printf("Passenger ID: Seat #%d, %s, %s\n", seatTracker[currentSeat].seatNumber,
 				seatTracker[currentSeat].lastName, seatTracker[currentSeat].firstName);
@@ -183,7 +197,7 @@ int NumOfFREESeats(PLANESEAT seatTracker[]) {
 	int freeSeats = 0;
 
 	while (currentSeat < PLANE_SIZE) {													
-		if (seatTracker[currentSeat].seatStatus == FREE)										// if seat staus is free ad 1 to free seat
+		if (seatTracker[currentSeat].seatStatus == FREE)											// if seat staus is free ad 1 to free seat
 			freeSeats++;
 		currentSeat++;
 	}
@@ -198,7 +212,7 @@ int NumOfFREESeats(PLANESEAT seatTracker[]) {
 void PrintFreeSeats(PLANESEAT seatTracker[]) {
 	int currentSeat = 0;
 
-	while (currentSeat < PLANE_SIZE) {															// checks if seat is full and if it is NOT it prints it
+	while (currentSeat < PLANE_SIZE) {																// checks if seat is full and if it is NOT it prints it
 		if (seatTracker[currentSeat].seatStatus == FREE)
 			printf("Passenger ID: Seat #%d, %s, %s\n", seatTracker[currentSeat].seatNumber,
 				seatTracker[currentSeat].lastName, seatTracker[currentSeat].firstName);

@@ -10,7 +10,8 @@
 #define PLANE_SIZE					12				// number of seats per plane
 #define STATUS_SIZE					5				// length of status thinghy
 #define NAME_LENGTH					25				// length of name
-
+#define NUM_OF_FLIGHTS				4
+	
 typedef enum status { FREE, FULL } STATUS;																		// status to see if seat is full or not (thx steve)
 
 typedef struct planeseat {
@@ -24,9 +25,9 @@ PLANESEAT createPassenger(char FirstName[], char LastName[], int SeatNumber);			
 
 void DefaultSeats(PLANESEAT seatTracker[]);																		// sets up all seats
 
-void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]);
+void GetFlightData(const char* oldFileName, int flightSelection, PLANESEAT seatTracker[]);						// grabs data from specific flight
 
-void WritePassengersToFile(const char* filename, PLANESEAT seatTracker[]);										// saves the passenger to file
+void WritePassengersToFile(const char* oldFile, const char* newFile, PLANESEAT seatTracker[]);					// saves the passenger to file
 
 void ReadPassengersFromFile(const char* oldFile, PLANESEAT seatTracker[]);										// reads a passenger from the file
 

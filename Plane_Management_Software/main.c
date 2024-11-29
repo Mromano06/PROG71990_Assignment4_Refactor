@@ -42,6 +42,7 @@ int main(void) {
 	const char* newFileName = "flightDataUpdated.txt";
 	FILE* originalFile;														// made temp files to create them
 	FILE* newFile;
+	PLANESEAT seatTracker[PLANE_SIZE];										// no longer a global variable
 
 	originalFile = fopen(originalFileName, "r");							// creates and adds new file
 	if (originalFile == NULL) {
@@ -53,7 +54,6 @@ int main(void) {
 		fprintf(stderr, "system was unable to create file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	newFile = fopen(newFileName, "w");										// creates and adds new files
 	if (newFile == NULL) {													// (also error checks)
 		fprintf(stderr, "system was unable to create file\n");
@@ -63,14 +63,10 @@ int main(void) {
 	fclose(originalFile);
 	fclose(newFile);
 
-	PLANESEAT seatTracker[PLANE_SIZE];										// no longer a global variable
 	DefaultSeats(seatTracker);
-
 	ReadPassengersFromFile(originalFileName, seatTracker);
-
 	PlaneInterface(originalFileName, newFileName, seatTracker);
-
-	WritePassengersToFile(newFileName, seatTracker);
+	WritePassengersToFile(originalFileName, newFileName, seatTracker);
 
 	return 0;
 }
